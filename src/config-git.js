@@ -1,4 +1,3 @@
-
 const { execSync } = require('child_process');
 const readline = require('readline');
 
@@ -11,10 +10,10 @@ console.log('Git Configuration Helper');
 
 rl.question('Enter your Git username: ', (username) => {
   execSync(`git config --global user.name "${username}"`, { encoding: 'utf8' });
-  
+
   rl.question('Enter your Git email: ', (email) => {
     execSync(`git config --global user.email "${email}"`, { encoding: 'utf8' });
-    
+
     rl.question('Enter your GitHub repository URL (e.g., https://github.com/username/repo.git): ', (repoUrl) => {
       try {
         // Check if git is initialized
@@ -25,7 +24,7 @@ rl.question('Enter your Git username: ', (username) => {
           console.log('Initializing git repository...');
           execSync('git init', { encoding: 'utf8' });
         }
-        
+
         // Set the remote origin
         try {
           execSync('git remote -v', { encoding: 'utf8' });
@@ -33,12 +32,12 @@ rl.question('Enter your Git username: ', (username) => {
         } catch (error) {
           execSync(`git remote add origin ${repoUrl}`, { encoding: 'utf8' });
         }
-        
+
         console.log('Git configuration completed successfully!');
       } catch (error) {
         console.error(`Error configuring git: ${error.message}`);
       }
-      
+
       rl.close();
     });
   });
