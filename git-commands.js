@@ -43,7 +43,13 @@ function showMenu() {
         break;
       case '3':
         rl.question('Enter commit message: ', (message) => {
-          executeCommand(`git commit -m "${message}"`);
+          // Check if there are any changes to commit
+          const statusOutput = execSync('git status --porcelain', { encoding: 'utf8' });
+          if (!statusOutput.trim()) {
+            console.log('No changes to commit. Working tree clean.');
+          } else {
+            executeCommand(`git commit -m "${message}"`);
+          }
           showMenu();
         });
         break;
