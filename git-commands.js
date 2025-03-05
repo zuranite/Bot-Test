@@ -48,11 +48,11 @@ function showMenu() {
         });
         break;
       case '4':
-        executeCommand('git push origin main');
+        executeCommand('git push https://github.com/zuranite/Bot-test.git main');
         showMenu();
         break;
       case '5':
-        executeCommand('git pull origin main');
+        executeCommand('git pull https://github.com/zuranite/Bot-test.git main');
         showMenu();
         break;
       case '6':
