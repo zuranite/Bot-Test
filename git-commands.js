@@ -54,16 +54,25 @@ function showMenu() {
         });
         break;
       case '4':
+        // Get the current branch
+        const currentBranch = execSync('git rev-parse --abbrev-ref HEAD', { encoding: 'utf8' }).trim();
         rl.question('Enter your GitHub username: ', (username) => {
           rl.question('Enter your GitHub personal access token: ', (token) => {
-            const repoUrl = `https://${username}:${token}@github.com/zuranite/Bot-test.git`;
-            executeCommand(`git push ${repoUrl} main`);
+            // Get remote URL without credentials
+            const remoteUrl = execSync('git config --get remote.origin.url', { encoding: 'utf8' }).trim();
+            // Extract repo path from URL
+            const repoPath = remoteUrl.replace(/^https:\/\/github\.com\//, '').replace(/^git@github\.com:/, '');
+            
+            const repoUrl = `https://${username}:${token}@github.com/${repoPath}`;
+            executeCommand(`git push ${repoUrl} ${currentBranch}`);
             showMenu();
           });
         });
         break;
       case '5':
-        executeCommand('git pull https://github.com/zuranite/Bot-test.git main');
+        // Get the current branch
+        const pullBranch = execSync('git rev-parse --abbrev-ref HEAD', { encoding: 'utf8' }).trim();
+        executeCommand(`git pull origin ${pullBranch}`);
         showMenu();
         break;
       case '6':
