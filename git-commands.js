@@ -54,8 +54,13 @@ function showMenu() {
         });
         break;
       case '4':
-        executeCommand('git push https://github.com/zuranite/Bot-test.git main');
-        showMenu();
+        rl.question('Enter your GitHub username: ', (username) => {
+          rl.question('Enter your GitHub personal access token: ', (token) => {
+            const repoUrl = `https://${username}:${token}@github.com/zuranite/Bot-test.git`;
+            executeCommand(`git push ${repoUrl} main`);
+            showMenu();
+          });
+        });
         break;
       case '5':
         executeCommand('git pull https://github.com/zuranite/Bot-test.git main');
