@@ -43,7 +43,7 @@ function stayactive() {
 client.on('ready', (c) => {
   console.log("Bot is ready for use.");
   ChannelsFetched = true
-  setInterval(stayactive, 1800000)
+  setInterval(stayactive, 150000)
   
 
 })
