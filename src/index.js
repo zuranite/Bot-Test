@@ -3,7 +3,7 @@ require('dotenv').config();
 const express = require("express");
 const expressapp = express()
 
-expressapp.listen(3000, {})
+expressapp.listen(443, {})
 
 expressapp.get("/", (req, res) => {
   res.send("Hello world!")
