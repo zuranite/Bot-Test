@@ -3,7 +3,11 @@ require('dotenv').config();
 const express = require("express");
 const expressapp = express()
 
-expressapp.listen(80, {})
+expressapp.listen(3000, {})
+
+expressapp.get("/", (req, res) => {
+  res.send("Hello world!")
+})
 
 const { channel } = require('diagnostics_channel');
 const { Client, IntentsBitField} = require('discord.js');
