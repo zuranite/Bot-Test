@@ -3,7 +3,7 @@ require('dotenv').config();
 const express = require("express");
 const expressapp = express()
 
-expressapp.listen(443, {})
+expressapp.listen(3000, {})
 
 expressapp.get("/", (req, res) => {
   res.send("Hello world!")
@@ -52,7 +52,11 @@ client.on('ready', (c) => {
 
 })
      
+client.on("messageCreate", (msg) => {
+  console.log(msg)
 
+
+})
 
 
 
