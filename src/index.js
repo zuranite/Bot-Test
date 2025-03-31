@@ -73,7 +73,6 @@ client.on('ready', (c) => {
 })
 
 function RuntimeFunc() {
-console.log(runtime)
 if (runtime.seconds === 59) {
   runtime.seconds = 0
   if (runtime.mins === 59 ) {
