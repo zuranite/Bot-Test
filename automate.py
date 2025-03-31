@@ -1,10 +1,11 @@
 import time
 import requests
 import validators
+import os
 from flask import Flask
 from threading import Thread
 
-website = input("https://managementbot-nxrb.onrender.com/")
+website = os.getenv("URL")
 
 app = Flask("/")
 
