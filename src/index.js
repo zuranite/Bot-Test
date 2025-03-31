@@ -38,17 +38,17 @@ let runtime = {
   seconds : 0
 
 }
-
+function RuntimeEmbedFunc(time) {
 const RuntimeEmbed = new EmbedBuilder()
       .setColor("#26a639")
       .setTitle("Runtime")
       .addFields(
-        { name: "Hours", value: `${runtime.hours}`, inline: true},
-        { name: "Minutes", value: `${runtime.mins}`, inline: true},
-        { name: "Seconds", value: `${runtime.seconds}`, inline: true},
+        { name: "Hours", value: `${time.hours}`, inline: true},
+        { name: "Minutes", value: `${time.mins}`, inline: true},
+        { name: "Seconds", value: `${time.seconds}`, inline: true},
       );
-
-
+return RuntimeEmbed
+    }
 // Maybe lets the codespace stay active
 function stayactive() {
   console.log("after 2 and a half minute")
@@ -68,30 +68,30 @@ client.on('ready', (c) => {
   botIsReady = true
   ChannelsFetched = true
   setInterval(stayactive, 150000)
+  setInterval(RuntimeFunc, 1000)
   
 
 })
 
 function RuntimeFunc() {
+console.log(runtime)
+if (runtime.seconds === 59) {
+  runtime.seconds = 0
+  if (runtime.mins === 59 ) {
+    runtime.mins = 0
+    runtime.hours += 1
 
-if (!runtime.seconds === 59) {
-  runtime.seconds = runtime.seconds + 1
+  }
+  else {
+  runtime.mins += 1}
 }
 else {
-  runtime.mins = runtime.mins + 1
-  runtime.seconds = 0
+runtime.seconds += 1
 }
-if (runtime.mins === 59) {
-runtime.mins = 0
-runtime.hours = runtime.hours + 1
 
-}
 
 }
  
-if (botIsReady) {
-  setInterval(RuntimeFunc, 1000)
-}
 
 
 
@@ -100,12 +100,13 @@ if (botIsReady) {
 
 
 
-client.on('interactionCreate'), (interaction) => {
+client.on('interactionCreate', (interaction) => {
   if (!interaction.isChatInputCommand()) return;
   if (interaction.commandName === 'time') {
-    client.channels.cache.get("1354492831103844454").send({ embeds: [RuntimeEmbed]})
+    const Embed = RuntimeEmbedFunc(runtime)
+    interaction.reply({embeds: [Embed]})
   }
-}
+})
 
 
 
