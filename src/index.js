@@ -43,10 +43,11 @@ const RuntimeEmbed = new EmbedBuilder()
       .setColor("#26a639")
       .setTitle("Runtime")
       .addFields(
-        { name: "Hours", value: runtime.hours, inline: true},
-        { name: "Minutes", value: runtime.mins, inline: true},
-        { name: "Seconds", value: runtime.seconds, inline: true}
-      )
+        { name: "Hours", value: `${runtime.hours}`, inline: true},
+        { name: "Minutes", value: `${runtime.mins}`, inline: true},
+        { name: "Seconds", value: `${runtime.seconds}`, inline: true},
+      );
+
 
 // Maybe lets the codespace stay active
 function stayactive() {
@@ -99,7 +100,12 @@ if (botIsReady) {
 
 
 
-
+client.on('interactionCreate'), (interaction) => {
+  if (!interaction.isChatInputCommand()) return;
+  if (interaction.commandName === 'time') {
+    client.channels.cache.get("1354492831103844454").send({ embeds: [RuntimeEmbed]})
+  }
+}
 
 
 
