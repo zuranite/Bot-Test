@@ -51,10 +51,9 @@ return RuntimeEmbed
     }
 // Maybe lets the codespace stay active
 function stayactive() {
-  console.log("after 2 and a half minute")
+  const Embed = RuntimeEmbedFunc(runtime)
   const GithubChannel = client.channels.cache.get("1354492831103844454")
-  GithubChannel.send("test")
-  GithubChannel.send({embeds: [RuntimeEmbed]})
+  GithubChannel.send({embeds: [Embed]})
 }
 
 
@@ -67,7 +66,7 @@ client.on('ready', (c) => {
   console.log("Bot is ready for use.");
   botIsReady = true
   ChannelsFetched = true
-  setInterval(stayactive, 150000)
+  setInterval(stayactive, 600000)
   setInterval(RuntimeFunc, 1000)
   
 
