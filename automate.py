@@ -4,7 +4,7 @@ import validators
 from flask import Flask
 from threading import Thread
 
-website = input("Please enter your website domain: ")
+website = input("https://managementbot-nxrb.onrender.com/")
 
 app = Flask("/")
 
