@@ -30,35 +30,67 @@ function sleep(ms) {
 
 }
 
+const { EmbedBuilder } = require("discord.js");
+
+let runtime = {
+  hours : 0,
+  mins : 0,
+  seconds : 0
+
+}
+
+const RuntimeEmbed = new EmbedBuilder()
+      .setColor("#26a639")
+      .setTitle("Runtime")
+      .addFields(
+        { name: "Hours", value: runtime.hours, inline: true},
+        { name: "Minutes", value: runtime.mins, inline: true},
+        { name: "Seconds", value: runtime.seconds, inline: true}
+      )
 
 // Maybe lets the codespace stay active
 function stayactive() {
   console.log("after 2 and a half minute")
   const GithubChannel = client.channels.cache.get("1354492831103844454")
   GithubChannel.send("test")
+  GithubChannel.send({embeds: [RuntimeEmbed]})
 }
 
 
 
-
+let botIsReady = false
  
 
 // Runs when the client(Bot) is online
 client.on('ready', (c) => {
   console.log("Bot is ready for use.");
+  botIsReady = true
   ChannelsFetched = true
   setInterval(stayactive, 150000)
   
 
 })
-     
-client.on("messageCreate", (msg) => {
-  console.log(msg)
 
+function RuntimeFunc() {
 
-})
+if (!runtime.seconds === 59) {
+  runtime.seconds = runtime.seconds + 1
+}
+else {
+  runtime.mins = runtime.mins + 1
+  runtime.seconds = 0
+}
+if (runtime.mins === 59) {
+runtime.mins = 0
+runtime.hours = runtime.hours + 1
 
+}
 
+}
+ 
+if (botIsReady) {
+  setInterval(RuntimeFunc, 1000)
+}
 
 
 
