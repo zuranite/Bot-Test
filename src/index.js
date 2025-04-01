@@ -41,7 +41,6 @@ function sleep(ms) {
 }
 
 const { EmbedBuilder } = require("discord.js");
-const { commands } = require('npm');
 
 let runtime = {
   hours : 0,
@@ -103,7 +102,8 @@ else {
 runtime.seconds += 1
 }
 let TimePassed = 0
-Timepassed += 1
+
+TimePassed = TimePassed + 1
 if (TimePassed === 10) {
   stayactive()
 }
