@@ -11,6 +11,8 @@ expressapp.get("/", (req, res) => {
 
 const { channel } = require('diagnostics_channel');
 const { Client, IntentsBitField} = require('discord.js');
+const { CommmandHandler } = require("djs-commander")
+const path = require('path')
 
 const client = new Client({
   intents: [
@@ -22,6 +24,14 @@ const client = new Client({
 
 })
 
+
+
+
+
+
+
+
+
 let ChannelsFetched = false
 
 
@@ -31,6 +41,7 @@ function sleep(ms) {
 }
 
 const { EmbedBuilder } = require("discord.js");
+const { commands } = require('npm');
 
 let runtime = {
   hours : 0,
@@ -38,6 +49,7 @@ let runtime = {
   seconds : 0
 
 }
+module.exports = runtime
 function RuntimeEmbedFunc(time) {
 const RuntimeEmbed = new EmbedBuilder()
       .setColor("#26a639")
@@ -59,15 +71,19 @@ function stayactive() {
 
 
 let botIsReady = false
- 
+
+
+
+
+
 
 // Runs when the client(Bot) is online
 client.on('ready', (c) => {
   console.log("Bot is ready for use.");
   botIsReady = true
   ChannelsFetched = true
-  setInterval(stayactive, 600000)
   setInterval(RuntimeFunc, 1000)
+  
   
 
 })
@@ -85,6 +101,11 @@ if (runtime.seconds === 59) {
 }
 else {
 runtime.seconds += 1
+}
+let TimePassed = 0
+Timepassed += 1
+if (TimePassed === 10) {
+  stayactive()
 }
 
 
