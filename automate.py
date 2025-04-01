@@ -2,13 +2,14 @@ import time
 import requests
 import validators
 import os
+from dotenv import load_dotenv
 from flask import Flask
 from threading import Thread
+load_dotenv()
 
-website = os.getenv("URL")
+website = os.getenv("WEB_URL")
 
 app = Flask("/")
-
 
 @app.route("/")
 def home():
