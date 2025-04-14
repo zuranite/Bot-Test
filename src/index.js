@@ -125,6 +125,7 @@ client.on('ready', (c) => {
   console.log("Bot is ready for use.");
   botIsReady = true
   ChannelsFetched = true
+  
   setInterval(RuntimeFunc, 1000)
   
   
@@ -257,13 +258,6 @@ client.on(Events.InteractionCreate, async interaction => {
 
 
 
-client.on('interactionCreate', (interaction) => {
-  if (!interaction.isChatInputCommand()) return;
-
-  if (interaction.commandName === 'ping') {
-    interaction.reply('Pong!')
-  }
-})
 
 client.on('interactionCreate', (interaction) => {
   if (!interaction.isChatInputCommand()) return;
@@ -275,8 +269,3 @@ client.on('interactionCreate', (interaction) => {
 })
 
 client.login(process.env.TOKEN)
-
-
-
-
-

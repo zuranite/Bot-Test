@@ -1,5 +1,8 @@
 const { SlashCommandBuilder } = require('discord.js');
 
+const commandEnabled = false;
+if (!commandEnabled) return;
+
 let theCommandtoDelete = undefined
 
 module.exports = {

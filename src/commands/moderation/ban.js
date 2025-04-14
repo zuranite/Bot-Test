@@ -2,6 +2,7 @@ const { SlashCommandBuilder } = require('discord.js')
 
 const commandEnabled = false
 if (!commandEnabled) return;
+
 module.exports = {
     data: new SlashCommandBuilder()
     .setName('ban')
