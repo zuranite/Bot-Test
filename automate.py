@@ -8,6 +8,7 @@ from threading import Thread
 load_dotenv()
 
 website = os.getenv("WEB_URL")
+print(website)
 
 app = Flask("/")
 
