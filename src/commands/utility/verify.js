@@ -4,7 +4,6 @@ const { sleep } = require('../../modules/sleep.js')
 
 
 
-
     module.exports = {
         data: new SlashCommandBuilder()
             .setName('verify')
@@ -57,8 +56,8 @@ const { sleep } = require('../../modules/sleep.js')
     
 
     // Embeds
-    const SuccessfulEmbed = EmbedCreator(interaction.user.tag, interaction.user.avatarURL(), 'Success! :tada:', `:white_check_mark: Successfully verified ${UserinGuild}!`, '#26a639')
-    const LogEmbed = EmbedCreator(`Command run by ${interaction.user.tag}`, interaction.user.avatarURL(), `User verified :white_check_mark:`, undefined, "#de7e09", [{ name: "User verified:", value: `${UserinGuild}`}])
+    const SuccessfulEmbed = EmbedCreator(interaction.user.tag, interaction.user.avatarURL(), 'Success! :tada:', `:white_check_mark: Successfully verified ${UserinGuild}!`, '#26a639', undefined, true)
+    const LogEmbed = EmbedCreator(`Command run by ${interaction.user.tag}`, interaction.user.avatarURL(), `User verified :white_check_mark:`, undefined, "#de7e09", [{ name: "User verified:", value: `${UserinGuild}`}], true)
     const loggingChannel = interaction.client.channels.cache.get("1357029113608798419")
 
     

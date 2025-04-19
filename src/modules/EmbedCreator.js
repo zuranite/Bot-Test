@@ -1,6 +1,6 @@
 const { EmbedBuilder } = require('discord.js')
 
-function EmbedCreator(AuthorText, AuthorAvUrl, Title, Description, Color, Fields) {
+function EmbedCreator(AuthorText, AuthorAvUrl, Title, Description, Color, Fields, Timestamp) {
     // If no Fields are passed, we initialize it with default data
   
   
@@ -30,8 +30,9 @@ function EmbedCreator(AuthorText, AuthorAvUrl, Title, Description, Color, Fields
     }
   
     // Set timestamp
+    if (Timestamp) {
     embed.setTimestamp();
-  
+    }
     return embed;
   }
   
