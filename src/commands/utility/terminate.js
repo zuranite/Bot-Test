@@ -30,11 +30,11 @@ module.exports = {
         
 
         // EMBEDS
-        const TerminateSuccessEmbed = EmbedCreator(`Comamnd run by ${interaction.user.tag}`, interaction.user.avatarURL(), "Successfully terminated!", undefined, "#26a639", [{ name: "User terminated:", value: `${user}`, inline: true}, { name: "Type:", value: "Soft Termination", inline: true}], true)
+        const TerminateSuccessEmbed = EmbedCreator(`Command run by ${interaction.user.tag}`, interaction.user.avatarURL(), "Successfully terminated!", undefined, "#26a639", [{ name: "User terminated:", value: `${user}`, inline: true}, { name: "Type:", value: "Soft Termination", inline: true}], true)
         const KickSuccessEmbed = EmbedCreator(`Command run by ${interaction.user.tag}`, interaction.user.avatarURL(), "Successfully terminated!", undefined, "#26a639", [{ name: "User terminated:", value: `${user}`, inline: true }, {name: "Type:", value: "Hard Termination", inline: true}], true)
         // const LogSuccessEmbed = EmbedCreator(`Command run by ${interaction.user.tag}`, interaction.user.avatarURL(), `Terminated user!`, undefined, 'Red', [{ name: User terminated}])
         function LogCreator(TypeofTermination) {
-          const LogEmbed = new EmbedCreator(`Command run by ${interaction.user.tag}`, interaction.user.avatarURL(), "Terminated user", undefined, 'Red', [{ name: "__User terminated:__", value: `${user}`, inline: true}, { name: "__Type of termination:__", value: `${TypeofTermination}`, inline: true}])
+          const LogEmbed = new EmbedCreator(`Command run by ${interaction.user.tag}`, interaction.user.avatarURL(), "Terminated user", undefined, 'Red', [{ name: "__User Terminated:__", value: `${user}`, inline: true}, { name: "__Type of Termination:__", value: `${TypeofTermination}`, inline: true}])
           return LogEmbed
         }
         
