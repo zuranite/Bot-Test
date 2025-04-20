@@ -133,6 +133,7 @@ client.on('ready', (c) => {
 })
 
 function RuntimeFunc() {
+  let TimePassed = 0
 if (runtime.seconds === 59) {
   runtime.seconds = 0
   if (runtime.mins === 59 ) {
@@ -141,15 +142,16 @@ if (runtime.seconds === 59) {
 
   }
   else {
-  runtime.mins += 1}
+  runtime.mins += 1
+  TimePassed += 1
+}
 }
 else {
 runtime.seconds += 1
 }
-let TimePassed = 0
 
-TimePassed = TimePassed + 1
-if (TimePassed === 10) {
+
+if (TimePassed === 15) {
   stayactive()
 }
 
