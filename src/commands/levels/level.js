@@ -259,7 +259,7 @@ module.exports = {
                 const rank = allLevels.findIndex((lvl) => lvl.userId === interaction.user.id)
 
                 const image = await createRankCard({
-                    avatarURL: interaction.user.avatarURL(),
+                    avatarURL: fetchedUser.displayAvatarURL(),
                     username: interaction.user.tag,
                     currentXP: LevelData.xp,
                     requiredXP: LevelXP(LevelData.level),
@@ -272,6 +272,7 @@ module.exports = {
 
                 // const Attachment = new AttachmentBuilder(image)
                 console.log("ATTACHMENT MADE")
+                interaction.editReply("Test")
                 await interaction.editReply({ files: [image]})
                 console.log("EDITED REPLY APPARENTLY FUCKTARD")
 
@@ -287,7 +288,7 @@ module.exports = {
                 const rank = allLevels.findIndex((lvl) => lvl.userId === useroption.id)
 
                 const image = await createRankCard({
-                    avatarURL: useroption.avatarURL(),
+                    avatarURL: fetchedUser.displayAvatarURL(),
                     username: useroption.tag,
                     currentXP: LevelData.xp,
                     requiredXP: LevelXP(LevelData.level),
