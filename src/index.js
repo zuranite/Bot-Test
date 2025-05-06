@@ -17,13 +17,40 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { Client, Collection, Events, GatewayIntentBits, MessageFlags } = require('discord.js');
 
+const eventHandler = require("./handlers/eventHandler")
+
 
 const client = new Client({ intents: [
   GatewayIntentBits.Guilds, 
   GatewayIntentBits.GuildMembers, 
   GatewayIntentBits.GuildMessages,
+  GatewayIntentBits.GuildPresences,
   GatewayIntentBits.MessageContent
 ] });
+
+
+
+
+(async () => {
+  try {
+    mongoose.set("strictQuery", false)
+    await mongoose.connect(process.env.DATABASE_URI)
+
+
+    console.log("Connected to mongoDB")
+    eventHandler(client)
+
+    client.login(process.env.TOKEN)
+  } catch(err) {
+    console.log(`Error with connecting to DB: ${err}`)
+  }
+
+
+
+})();
+
+
+
 
 client.commands = new Collection();
 
@@ -61,6 +88,7 @@ for (const folder of commandFolders) {
 //   ],
 
 // })
+
 
 
 
@@ -137,22 +165,18 @@ function RuntimeFunc() {
 
 if (runtime.seconds === 59) {
   runtime.seconds = 0
-  if (runtime.mins === 59 ) {
-    runtime.mins = 0
-    runtime.hours += 1
-
-  }
-  else {
   runtime.mins += 1
   TimePassed += 1
 }
-}
-else {
-runtime.seconds += 1
+if (runtime.mins === 59 & runtime.seconds === 59) {
+    runtime.mins = 0
+    runtime.hours += 1
+
 }
 
 
-if (TimePassed === 15) {
+
+if (TimePassed === 720) {
   TimePassed = 0
   stayactive()
 }
@@ -221,6 +245,7 @@ function EmbedCreator(AuthorText, AuthorAvUrl, Title, Description, Color, Fields
 }
 
 module.exports = { EmbedCreator, runtime, sleep};
+module.exports = client
 
 
 // client.on('interactionCreate', (interaction) => {
@@ -258,7 +283,9 @@ client.on(Events.InteractionCreate, async interaction => {
 
 
 
-
+client.on("messageCreate", (msg) => {
+  
+})
 
 
 
@@ -272,4 +299,3 @@ client.on('interactionCreate', (interaction) => {
   }
 })
 
-client.login(process.env.TOKEN)

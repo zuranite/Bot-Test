@@ -2,6 +2,9 @@ const { SlashCommandBuilder, MessageFlags } = require("discord.js")
 const { EmbedCreator } = require("../../modules/EmbedCreator")
 const { sleep } = require("../../modules/sleep");
 
+const commandEnabled = false
+if (!commandEnabled) return;
+
 
 
 module.exports = {

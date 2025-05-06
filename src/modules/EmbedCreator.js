@@ -10,7 +10,9 @@ function EmbedCreator(AuthorText, AuthorAvUrl, Title, Description, Color, Fields
         embed.setAuthor({ name: AuthorText, iconURL: AuthorAvUrl })
       
       }
+      if (Title) {
       embed.setTitle(Title);
+      }
   
     // Add Description if provided
     if (Description) {
