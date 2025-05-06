@@ -268,11 +268,10 @@ module.exports = {
                     presence: fetchedUser.presence.status,
                 })
                 console.log("RANK CARD CREATED")
-                //image = Buffer.from(arrayBuffer)
+                image = Buffer.from(arrayBuffer)
 
                 // const Attachment = new AttachmentBuilder(image)
                 console.log("ATTACHMENT MADE")
-                interaction.editReply("Test")
                 await interaction.editReply({ files: [image]})
                 console.log("EDITED REPLY APPARENTLY FUCKTARD")
 
