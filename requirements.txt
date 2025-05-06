@@ -2,4 +2,3 @@ requests==2.32.3
 validators==0.22.0
 python-dotenv==1.1.0
 flask==3.1.0
-canvas==10.8.2
