@@ -270,9 +270,9 @@ module.exports = {
                 console.log("RANK CARD CREATED")
                 //image = Buffer.from(arrayBuffer)
 
-                const Attachment = new AttachmentBuilder(image)
+                // const Attachment = new AttachmentBuilder(image)
                 console.log("ATTACHMENT MADE")
-                await interaction.editReply({ files: [Attachment]})
+                await interaction.editReply({ files: [image]})
                 console.log("EDITED REPLY APPARENTLY FUCKTARD")
 
             }
