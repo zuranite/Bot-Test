@@ -220,7 +220,6 @@ module.exports = {
         await interaction.deferReply()
 
         const useroption = interaction.options.getUser("user")
-        await interaction.user.fetch()
         const interactionuserID = await interaction.user.id
         const fetchedUser = await interaction.guild.members.fetch(useroption?.id || interactionuserID)
 
