@@ -1,9 +1,6 @@
 const { SlashCommandBuilder, AttachmentBuilder, MessageFlags } = require("discord.js")
 const Level = require("../../Models/Level.js")
-const canvacord = require("canvacord")
 const LevelXP = require("../../utils/LevelXP.js")
-const { Font } = require("canvacord")
-// Font.loadDefault()
 
 const presenceColors = {
     "online": "#3ed606",
