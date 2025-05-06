@@ -21,17 +21,17 @@ module.exports = {
             if (index + 1 === 1) {
                 top10.name = '\u200b'
                 top10.value = `🥇. <@${value.userId}> **LEVEL:** ${value.level}`
-                await fields.push(top10)
+                fields.push(top10)
                 top10 = {}
             } else if (index + 1 === 2) {
                 top10.name = "\u200b"
                 top10.value = `🥈. <@${value.userId}> **LEVEL:** ${value.level}`
-                await fields.push(top10)
+                fields.push(top10)
                 top10 = {}
             } else if (index + 1 === 3) {
                 top10.name = "\u200b"
                 top10.value = `🥉. <@${value.userId}> **LEVEL:** ${value.level}`
-                await fields.push(top10)
+                fields.push(top10)
                 top10 = {}
             }
         } 
@@ -48,14 +48,14 @@ module.exports = {
         let top10Levels = allLevels.slice(0, 11)
         
 
-        top10Levels.forEach(async (value, index) => {
-            if (Top3[index + 1]) {
+        top10Levels.forEach((value, index) => {
+            if (Top3.includes(index + 1)) {
                 Top3TextLb(value, index)
             } else {
                 top10.name = '\u200b'
-                top10.value = `${index + 1}. <@${value.userId}> **LEVEL:** ${value.level}`
+                top10.value = `\u200b \u200b ${index + 1}. <@${value.userId}> **LEVEL:** ${value.level}`
                 console.log(top10)
-                await fields.push(top10)
+                fields.push(top10)
                 top10 = {}
             }
         })
