@@ -267,9 +267,11 @@ module.exports = {
                     rank: rank + 1,
                     presence: fetchedUser.presence.status,
                 })
+                console.log("RANK CARD CREATED")
                 //image = Buffer.from(arrayBuffer)
 
                 const Attachment = new AttachmentBuilder(image)
+                console.log("ATTACHMENT MADE")
                 interaction.editReply({ files: [Attachment]})
 
             }
