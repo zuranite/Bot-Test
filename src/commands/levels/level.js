@@ -297,8 +297,8 @@ module.exports = {
                 })
                 //image = Buffer.from(arrayBuffer)
 
-                const Attachment = new AttachmentBuilder(image)
-                interaction.editReply({ files: [Attachment]})
+                const Attachment = await new AttachmentBuilder(image)
+                await interaction.editReply({ files: [Attachment]})
             }
         }
 
