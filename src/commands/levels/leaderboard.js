@@ -54,7 +54,6 @@ module.exports = {
             } else {
                 top10.name = '\u200b'
                 top10.value = `\u200b \u200b ${index + 1}. <@${value.userId}> **LEVEL:** ${value.level}`
-                console.log(top10)
                 fields.push(top10)
                 top10 = {}
             }

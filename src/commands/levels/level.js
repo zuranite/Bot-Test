@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, AttachmentBuilder, MessageFlags } = require("discord.js")
+const { SlashCommandBuilder, AttachmentBuilder } = require("discord.js")
 const Level = require("../../Models/Level.js")
 const LevelXP = require("../../utils/LevelXP.js")
 
@@ -215,6 +215,7 @@ module.exports = {
         
     ),
     async execute(interaction) {
+        console.log("LEVEL COMMAND ACKNOWLEDGED")
         await interaction.deferReply()
 
         const useroption = interaction.options.getUser("user")
