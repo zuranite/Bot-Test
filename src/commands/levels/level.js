@@ -95,6 +95,7 @@ async function createRankCard(options) {
     const avatarbuffer = await res.toBuffer();
     // const avatarbuffer = Buffer.from(arraybuffer)
     const avatar = await loadImage(avatarbuffer);
+    console.log("LOADED")
 
     // Draw Circular Avatar
     ctx.save();
