@@ -91,9 +91,10 @@ async function createRankCard(options) {
 
     // Load Avatar
     avatarURL = avatarURL.replace(".webp", ".png")
+    console.log(avatarURL)
     const res = await fetch(avatarURL);
-    const avatarbuffer = Buffer.from(res)
-    // const avatarbuffer = Buffer.from(arraybuffer)
+    const arraybuffer = await res.arrayBuffer()
+    const avatarbuffer = await Buffer.from(arraybuffer)
     const avatar = await loadImage(avatarbuffer);
     console.log("LOADED")
 
