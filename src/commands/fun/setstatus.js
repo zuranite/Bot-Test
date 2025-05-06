@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, ActivityType } = require("discord.js")
 
-const commandEnabled = false
+const commandEnabled = true
 if (!commandEnabled) return;
 
 module.exports = {
