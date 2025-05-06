@@ -253,11 +253,11 @@ module.exports = {
           //  };
 
 
-            let rank = allLevels.findIndex((lvl) => lvl.userId === interaction.user.id)
+            let rank = await allLevels.findIndex((lvl) => lvl.userId === interaction.user.id)
 
             const LevelData = await Level.findOne(query)
             if (LevelData) {
-                const rank = allLevels.findIndex((lvl) => lvl.userId === interaction.user.id)
+                const rank = await allLevels.findIndex((lvl) => lvl.userId === interaction.user.id)
 
                 const image = await createRankCard({
                     avatarURL: fetchedUser.displayAvatarURL(),
