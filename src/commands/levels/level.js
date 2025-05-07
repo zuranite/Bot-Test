@@ -91,12 +91,10 @@ async function createRankCard(options) {
 
     // Load Avatar
     avatarURL = avatarURL.replace(".webp", ".png")
-    console.log(avatarURL)
     const res = await fetch(avatarURL, { headers: { "User-Agent": "Mozilla/5.0"}});
     const arraybuffer = await res.arrayBuffer()
     const avatarbuffer = await Buffer.from(arraybuffer)
     const avatar = await loadImage(avatarbuffer);
-    console.log("LOADED")
 
     // Draw Circular Avatar
     ctx.save();
@@ -269,13 +267,11 @@ module.exports = {
                     rank: rank + 1,
                     presence: fetchedUser.presence?.status,
                 })
-                console.log("RANK CARD CREATED")
+                
 
                 const Attachment = new AttachmentBuilder(image, { name: "rank.png" })
-                console.log("ATTACHMENT MADE")
                 console.log(Attachment)
                 await interaction.editReply({ files: [Attachment]})
-                console.log("EDITED REPLY APPARENTLY FUCKTARD")
 
             }
 
@@ -300,11 +296,9 @@ module.exports = {
                 //image = Buffer.from(arrayBuffer)
 
                 const Attachment = await new AttachmentBuilder(image, { name: "rank.png" })
-                console.log("attach builded")
-                console.log(Attachment)
-                if (Attachment) {
-                    await interaction.editReply({ files: [Attachment]})
-                }
+
+                await interaction.editReply({ files: [Attachment]})
+                
             }
         }
 
