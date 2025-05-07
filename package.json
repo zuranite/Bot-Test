@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "git-helper": "node git-commands.js",
-    "register": "node src/register-commands.js"
+    "register": "node src/register-commands.js",
+    "build": "apt-get update && apt-get install -y build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev && npm install && python -m pip install -r requirements.txt"
   },
   "keywords": [],
   "author": "",
