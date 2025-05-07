@@ -223,6 +223,7 @@ module.exports = {
         const useroption = interaction.options.getUser("user")
         const interactionuserID = await interaction.user.id
         const fetchedUser = await interaction.guild.members.fetch(useroption?.id || interactionuserID)
+        console.log(fetchedUser.id)
 
         const query = {
             userId: useroption?.id || interactionuserID,
