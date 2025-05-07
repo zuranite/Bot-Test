@@ -267,11 +267,11 @@ module.exports = {
                     requiredXP: LevelXP(LevelData.level),
                     level: LevelData.level,
                     rank: rank + 1,
-                    presence: fetchedUser.presence.status,
+                    presence: fetchedUser.presence?.status,
                 })
                 console.log("RANK CARD CREATED")
 
-                const Attachment = new AttachmentBuilder(image)
+                const Attachment = new AttachmentBuilder(image, { name: "rank.png" })
                 console.log("ATTACHMENT MADE")
                 console.log(Attachment)
                 await interaction.editReply({ files: [Attachment]})
@@ -295,11 +295,11 @@ module.exports = {
                     requiredXP: LevelXP(LevelData.level),
                     level: LevelData.level,
                     rank: rank + 1,
-                    presence: fetchedUser.presence.status,
+                    presence: fetchedUser.presence?.status,
                 })
                 //image = Buffer.from(arrayBuffer)
 
-                const Attachment = await new AttachmentBuilder(image)
+                const Attachment = await new AttachmentBuilder(image, { name: "rank.png" })
                 console.log("attach builded")
                 console.log(Attachment)
                 if (Attachment) {
