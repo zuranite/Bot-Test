@@ -18,7 +18,7 @@ WORKDIR /app
 # Copy package files and install dependencies
 COPY package*.json ./
 RUN npm install
-RUN npm run build
+RUN pip install
 
 # Copy rest of the project
 COPY . .
