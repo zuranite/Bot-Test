@@ -16,7 +16,7 @@ function randomXP(minimum, maximum) {
 }
 
 module.exports = async (client, message) => {
-    if (!message.inGuild() || message.author.bot || cooldowns.has(message.author.id) || message.guild.id !== "1330144654112325702") return;
+    if (!message.inGuild() || message.author.bot || cooldowns.has(message.author.id) || message.guild.id !== process.env.ZURA_WORKS ) return;
 
     const daXPtoGive = randomXP(40, 60)
 
