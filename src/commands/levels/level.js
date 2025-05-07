@@ -273,6 +273,7 @@ module.exports = {
 
                 const Attachment = new AttachmentBuilder(image)
                 console.log("ATTACHMENT MADE")
+                console.log(Attachment)
                 await interaction.editReply({ files: [Attachment]})
                 console.log("EDITED REPLY APPARENTLY FUCKTARD")
 
@@ -300,6 +301,7 @@ module.exports = {
 
                 const Attachment = await new AttachmentBuilder(image)
                 console.log("attach builded")
+                console.log(Attachment)
                 if (Attachment) {
                     await interaction.editReply({ files: [Attachment]})
                 }
