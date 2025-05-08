@@ -9,6 +9,7 @@ RUN apt-get update && \
     libpango1.0-dev \
     libjpeg-dev \
     libgif-dev \
+    python3-setuptools \
     python3-dev \
     python3-pip \
     librsvg2-dev \
