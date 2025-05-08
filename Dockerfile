@@ -12,6 +12,7 @@ RUN apt-get update && \
     python3-setuptools \
     python3-dev \
     python3-pip \
+    python3-venv \
     librsvg2-dev \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
@@ -25,6 +26,7 @@ WORKDIR /app
 # Copy package files and install dependencies
 COPY package*.json ./
 COPY requirements.txt ./
+RUN which python3 && which pip
 RUN npm install
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
