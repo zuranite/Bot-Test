@@ -28,7 +28,7 @@ COPY package*.json ./
 COPY requirements.txt ./
 RUN which python3 && which pip
 RUN npm install
-RUN pip install --upgrade pip && pip install -r requirements.txt
+RUN pip install -r requirements.txt
 
 # Copy rest of the project
 COPY . .
