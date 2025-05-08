@@ -10,6 +10,7 @@ RUN apt-get update && \
     libjpeg-dev \
     libgif-dev \
     python3-dev \
+    python3-pip \
     librsvg2-dev \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
