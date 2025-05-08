@@ -15,6 +15,10 @@ RUN apt-get update && \
     librsvg2-dev \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
+# Virtual ENV
+RUN python3 - venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
 # Set working directory
 WORKDIR /app
 
@@ -22,13 +26,13 @@ WORKDIR /app
 COPY package*.json ./
 COPY requirements.txt ./
 RUN npm install
-RUN pip install -r requirements.txt
+RUN pip install --upgrade pip && pip install -r requirements.txt
 
 # Copy rest of the project
 COPY . .
 
 # Optional: expose a port if needed
-# EXPOSE 3000
+EXPOSE 3000
 
 # Run the bot
 CMD node . && python automate.py # Change to your actual entry file
