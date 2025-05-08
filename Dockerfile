@@ -9,6 +9,7 @@ RUN apt-get update && \
     libpango1.0-dev \
     libjpeg-dev \
     libgif-dev \
+    python3-dev \
     librsvg2-dev \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
@@ -17,6 +18,7 @@ WORKDIR /app
 
 # Copy package files and install dependencies
 COPY package*.json ./
+COPY requirements.txt ./
 RUN npm install
 RUN pip install -r requirements.txt
 
@@ -27,4 +29,4 @@ COPY . .
 # EXPOSE 3000
 
 # Run the bot
-CMD ["node", "src/index.js"]  # Change to your actual entry file
+CMD node . && python automate.py # Change to your actual entry file
