@@ -27,6 +27,7 @@ WORKDIR /app
 COPY package*.json ./
 COPY requirements.txt ./
 RUN which python3 && which pip
+RUN python3 --version
 RUN npm install
 RUN pip install -r requirements.txt
 
