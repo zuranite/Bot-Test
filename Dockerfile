@@ -17,7 +17,7 @@ RUN apt-get update && \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Virtual ENV
-RUN python3 - venv /opt/venv
+RUN python3 -venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
 # Set working directory
