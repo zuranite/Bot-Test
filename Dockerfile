@@ -38,4 +38,5 @@ COPY . .
 EXPOSE 3000
 
 # Run the bot
-CMD node . && python automate.py # Change to your actual entry file
+CMD node . & python automate.py 
+# Change to your actual entry file
