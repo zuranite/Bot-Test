@@ -215,8 +215,8 @@ module.exports = {
         
     ),
     async execute(interaction) {
-        console.log("LEVEL COMMAND ACKNOWLEDGED")
-        await interaction.deferReply()
+        console.log("lvl cmd received")
+        interaction.deferReply()
 
         const useroption = interaction.options.getUser("user")
         const interactionuserID = await interaction.user.id
