@@ -309,11 +309,7 @@ module.exports = {
         }
     } catch(error) {
         console.log(`Error handling LEVEL command: ${error}`)
-        if ( interaction.deferred || interaction.replied ) {
             interaction.editReply({ content: `Error: ${error}`, flags: MessageFlags.Ephemeral})
-        } else {
-            interaction.reply({ content: `Error: ${error}`, flags: MessageFlags.Ephemeral})
-        }
     }
 
     }
