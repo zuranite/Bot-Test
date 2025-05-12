@@ -1,6 +1,5 @@
 const { Client, Member } = require("discord.js")
 const { EmbedCreator } = require("../../modules/EmbedCreator.js")
-const { channel } = require("diagnostics_channel")
 
 /**
  * 
