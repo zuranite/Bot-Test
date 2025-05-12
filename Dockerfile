@@ -34,8 +34,8 @@ RUN pip install -r requirements.txt
 # Copy rest of the project
 COPY . .
 
-# Optional: expose a port if needed
-EXPOSE 3000
+# Make the shell script executable
+RUN chmod +x start.sh
 
-# Run the bot
-CMD node . && python automate.py # Change to your actual entry file
+# Run the shell script to start both Node.js and Python processes
+CMD ["./start.sh"]
