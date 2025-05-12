@@ -29,7 +29,7 @@ COPY requirements.txt ./
 RUN which python3 && which pip
 RUN python3 --version
 RUN npm install
-RUN pip install -r requirements.txt
+RUN pip --no-cache-dir install -r requirements.txt
 
 # Copy rest of the project
 COPY . .
@@ -37,5 +37,16 @@ COPY . .
 # Make the shell script executable
 RUN chmod +x start.sh
 
+<<<<<<< HEAD
 # Run the shell script to start both Node.js and Python processes
 CMD ["./start.sh"]
+=======
+# Run the bot
+CMD node . & python automate.py 
+
+RUN docker ps
+# Change to your actual entry file
+
+RUN docker run -d --memory="512m" sha256:09e15e03e3a590c054a46175a065d8bdeac20d24cbd9578fa619544f69db5ae6
+
+>>>>>>> f1ce239ad82fc5330da14913acc718d6e59d1fb2
