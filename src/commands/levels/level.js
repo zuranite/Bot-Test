@@ -256,7 +256,7 @@ module.exports = {
 
             const LevelData = await Level.findOne(query)
             if (LevelData) {
-                const rank = await allLevels.findIndex((lvl) => lvl.userId === interaction.user.id)
+                const rank = allLevels.findIndex((lvl) => lvl.userId === interaction.user.id)
 
                 const image = await createRankCard({
                     avatarURL: fetchedUser.displayAvatarURL(),
@@ -295,7 +295,7 @@ module.exports = {
                 })
                 //image = Buffer.from(arrayBuffer)
 
-                const Attachment = await new AttachmentBuilder(image, { name: "rank.png" })
+                const Attachment = new AttachmentBuilder(image, { name: "rank.png" })
 
                 interaction.editReply({ files: [Attachment]})
                 
