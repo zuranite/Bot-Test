@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, AttachmentBuilder } = require("discord.js")
+const { SlashCommandBuilder, AttachmentBuilder, MessageFlags } = require("discord.js")
 const Level = require("../../Models/Level.js")
 const LevelXP = require("../../utils/LevelXP.js")
 
@@ -91,7 +91,11 @@ async function createRankCard(options) {
 
     // Load Avatar
     avatarURL = avatarURL.replace(".webp", ".png")
-    const res = await fetch(avatarURL, { headers: { "User-Agent": "Mozilla/5.0"}});
+    const res = await Promise.race([
+    fetch(avatarURL, { headers: { "User-Agent": "Mozilla/5.0" }}),
+    new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout fetching avatar")), 2000))
+]);
+
     const arraybuffer = await res.arrayBuffer()
     const avatarbuffer = await Buffer.from(arraybuffer)
     const avatar = await loadImage(avatarbuffer);
@@ -215,8 +219,10 @@ module.exports = {
         
     ),
     async execute(interaction) {
+        try {
+
         console.log("lvl cmd received")
-        interaction.deferReply()
+        await interaction.deferReply()
 
         const useroption = interaction.options.getUser("user")
         const interactionuserID = await interaction.user.id
@@ -301,6 +307,15 @@ module.exports = {
                 
             }
         }
+    } catch(error) {
+        console.log(`Error handling LEVEL command: ${error}`)
+        if ( interaction.replied || interaction.deferred ) {
+            interaction.editReply({ content: `Error: ${error}`, flags: MessageFlags.Ephemeral})
+        } else {
+            interaction.reply({ content: `Error: ${error}`, flags: MessageFlags.Ephemeral})
+        }
+    }
 
     }
+
 }
