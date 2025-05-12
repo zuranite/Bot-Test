@@ -269,7 +269,7 @@ module.exports = {
                 })
                 
 
-                const Attachment = new AttachmentBuilder(image, { name: "rank.png" })
+                const Attachment = await new AttachmentBuilder(image, { name: "rank.png" })
                 console.log(Attachment)
                 interaction.editReply({ files: [Attachment]})
 
@@ -295,7 +295,7 @@ module.exports = {
                 })
                 //image = Buffer.from(arrayBuffer)
 
-                const Attachment = new AttachmentBuilder(image, { name: "rank.png" })
+                const Attachment = await new AttachmentBuilder(image, { name: "rank.png" })
 
                 interaction.editReply({ files: [Attachment]})
                 
