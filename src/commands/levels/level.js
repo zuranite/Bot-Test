@@ -271,7 +271,7 @@ module.exports = {
 
                 const Attachment = new AttachmentBuilder(image, { name: "rank.png" })
                 console.log(Attachment)
-                await interaction.editReply({ files: [Attachment]})
+                interaction.editReply({ files: [Attachment]})
 
             }
 
@@ -297,7 +297,7 @@ module.exports = {
 
                 const Attachment = await new AttachmentBuilder(image, { name: "rank.png" })
 
-                await interaction.editReply({ files: [Attachment]})
+                interaction.editReply({ files: [Attachment]})
                 
             }
         }
