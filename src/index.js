@@ -282,20 +282,3 @@ client.on(Events.InteractionCreate, async interaction => {
 
 
 
-
-client.on("messageCreate", (msg) => {
-  
-})
-
-
-
-
-client.on('interactionCreate', (interaction) => {
-  if (!interaction.isChatInputCommand()) return;
-
-  if (interaction.commandName === 'roleid') {
-    const role = interaction.options.getRole('roleid', true).id
-    interaction.reply(role)
-  }
-})
-
