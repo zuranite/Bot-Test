@@ -24,6 +24,8 @@ executing==2.2.0
 fastjsonschema==2.21.1
 filelock==3.13.1
 Flask==3.1.0
+flask
+dotenv
 fonttools==4.56.0
 fqdn==1.5.1
 fsspec==2024.6.1
@@ -111,6 +113,7 @@ soupsieve==2.6
 stack-data==0.6.3
 sympy==1.13.1
 terminado==0.18.1
+time
 threadpoolctl==3.6.0
 tinycss2==1.4.0
 torch==2.6.0
