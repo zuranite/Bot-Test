@@ -225,8 +225,8 @@ module.exports = {
         console.log("lvl cmd received")
         
 
-        const useroption = await interaction.options.getUser("user")
-        const interactionuserID = await interaction.user.id
+        const useroption = interaction.options.getUser("user")
+        const interactionuserID = interaction.user.id
         const fetchedUser = await interaction.guild.members.fetch(useroption?.id || interactionuserID)
         console.log(fetchedUser.id)
 
@@ -262,7 +262,7 @@ module.exports = {
 
             const LevelData = await Level.findOne(query)
             if (LevelData) {
-                const rank = await allLevels.findIndex((lvl) => lvl.userId === interaction.user.id)
+                const rank = allLevels.findIndex((lvl) => lvl.userId === interaction.user.id)
 
                 const image = await createRankCard({
                     avatarURL: fetchedUser.displayAvatarURL(),
@@ -277,7 +277,7 @@ module.exports = {
 
                 const Attachment = await new AttachmentBuilder(image, { name: "rank.png" })
                 console.log(Attachment)
-                await interaction.editReply({ files: [Attachment]})
+                await interaction.editReply({ content: " ", files: [Attachment]})
 
             }
 
@@ -288,7 +288,7 @@ module.exports = {
             if (LevelData) {
                 //interaction.editreply(`This is ur xp discordian: ${LevelData.xp}`)
 
-                const rank = await allLevels.findIndex((lvl) => lvl.userId === useroption.id)
+                const rank = allLevels.findIndex((lvl) => lvl.userId === useroption.id)
 
                 const image = await createRankCard({
                     avatarURL: fetchedUser.displayAvatarURL(),
@@ -300,10 +300,11 @@ module.exports = {
                     presence: fetchedUser.presence?.status,
                 })
                 //image = Buffer.from(arrayBuffer)
+                console.log("Buffer size:", image.length / 1024)
 
                 const Attachment = await new AttachmentBuilder(image, { name: "rank.png" })
 
-                await interaction.editReply({ files: [Attachment]})
+                await interaction.editReply({ content: " ", files: [Attachment]})
                 
             }
         }
