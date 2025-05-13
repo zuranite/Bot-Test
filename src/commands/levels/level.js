@@ -219,13 +219,14 @@ module.exports = {
         
     ),
     async execute(interaction) {
+        await interaction.deferReply()
         try {
 
         console.log("lvl cmd received")
-        await interaction.deferReply()
+        
 
-        const useroption = interaction.options.getUser("user")
-        const interactionuserID = interaction.user.id
+        const useroption = await interaction.options.getUser("user")
+        const interactionuserID = await interaction.user.id
         const fetchedUser = interaction.guild.members.fetch(useroption?.id || interactionuserID)
         console.log(fetchedUser.id)
 
@@ -258,11 +259,10 @@ module.exports = {
           //  };
 
 
-            let rank = allLevels.findIndex((lvl) => lvl.userId === interaction.user.id)
 
             const LevelData = await Level.findOne(query)
             if (LevelData) {
-                const rank = allLevels.findIndex((lvl) => lvl.userId === interaction.user.id)
+                const rank = await allLevels.findIndex((lvl) => lvl.userId === interaction.user.id)
 
                 const image = await createRankCard({
                     avatarURL: fetchedUser.displayAvatarURL(),
@@ -288,7 +288,7 @@ module.exports = {
             if (LevelData) {
                 //interaction.editreply(`This is ur xp discordian: ${LevelData.xp}`)
 
-                const rank = allLevels.findIndex((lvl) => lvl.userId === useroption.id)
+                const rank = await allLevels.findIndex((lvl) => lvl.userId === useroption.id)
 
                 const image = await createRankCard({
                     avatarURL: fetchedUser.displayAvatarURL(),
