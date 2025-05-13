@@ -2,7 +2,7 @@ const { SlashCommandBuilder, MessageFlags } = require("discord.js")
 const { EmbedCreator } = require("../../modules/EmbedCreator")
 const { sleep } = require("../../modules/sleep");
 
-const commandEnabled = false
+const commandEnabled = true
 if (!commandEnabled) return;
 
 
