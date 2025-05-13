@@ -227,7 +227,7 @@ module.exports = {
 
         const useroption = interaction.options.getUser("user")
         const interactionuserID = interaction.user.id
-        const fetchedUser = await interaction.guild.members.fetch(useroption?.id || interactionuserID)
+        const fetchedUser = interaction.guild.members.fetch(useroption?.id || interactionuserID)
         console.log(fetchedUser.id)
 
         const query = {
@@ -260,7 +260,7 @@ module.exports = {
 
 
 
-            const LevelData = await Level.findOne(query)
+            const LevelData = Level.findOne(query)
             if (LevelData) {
                 const rank = allLevels.findIndex((lvl) => lvl.userId === interaction.user.id)
 
@@ -302,7 +302,7 @@ module.exports = {
                 //image = Buffer.from(arrayBuffer)
                 console.log("Buffer size:", image.length / 1024)
 
-                const Attachment = await new AttachmentBuilder(image, { name: "rank.png" })
+                const Attachment = anew AttachmentBuilder(image, { name: "rank.png" })
 
                 await interaction.editReply({ content: " ", files: [Attachment]})
                 
@@ -310,7 +310,7 @@ module.exports = {
         }
     } catch(error) {
          if (!interaction.replied && !interaction.deferred) {
-        await interaction.reply({ content: 'There was an issue executing the command.', flags: MessageFlags.Ephemeral });
+        await interaction.editReply({ content: `There was an issue executing the command: ${error}`, flags: MessageFlags.Ephemeral });
     } else {
         try {
             await interaction.editReply({ content: `Error executing command: ${error}`});
