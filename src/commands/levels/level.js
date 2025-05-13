@@ -277,7 +277,7 @@ module.exports = {
 
                 const Attachment = await new AttachmentBuilder(image, { name: "rank.png" })
                 console.log(Attachment)
-                interaction.editReply({ files: [Attachment]})
+                await interaction.editReply({ files: [Attachment]})
 
             }
 
@@ -303,13 +303,20 @@ module.exports = {
 
                 const Attachment = await new AttachmentBuilder(image, { name: "rank.png" })
 
-                interaction.editReply({ files: [Attachment]})
+                await interaction.editReply({ files: [Attachment]})
                 
             }
         }
     } catch(error) {
-        console.log(`Error handling LEVEL command: ${error}`)
-            interaction.editReply({ content: `Error: ${error}`, flags: MessageFlags.Ephemeral})
+         if (!interaction.replied && !interaction.deferred) {
+        await interaction.reply({ content: 'There was an issue executing the command.', flags: MessageFlags.Ephemeral });
+    } else {
+        try {
+            await interaction.editReply({ content: `Error executing command: ${error}`});
+        } catch (err) {
+            console.error('Failed to edit reply:', err);
+        }
+    }
     }
 
     }
