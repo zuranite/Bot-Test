@@ -302,7 +302,7 @@ module.exports = {
                 //image = Buffer.from(arrayBuffer)
                 console.log("Buffer size:", image.length / 1024)
 
-                const Attachment = anew AttachmentBuilder(image, { name: "rank.png" })
+                const Attachment = new AttachmentBuilder(image, { name: "rank.png" })
 
                 await interaction.editReply({ content: " ", files: [Attachment]})
                 
