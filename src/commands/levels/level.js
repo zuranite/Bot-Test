@@ -105,10 +105,15 @@ async function createRankCard(options) {
     ctx.beginPath();
     ctx.arc(125, 141, 80, 0, Math.PI * 2, true);
     ctx.closePath();
-    if (presenceColors[presence]) {
-        const color = presenceColors[presence]
+    if (presence) {
+        if (presenceColors[presence]) {
+            const color = presenceColors[presence]
+            ctx.lineWidth = 4
+            ctx.strokeStyle = color
+        }
+    } else {
         ctx.lineWidth = 4
-        ctx.strokeStyle = color
+        ctx.strokeStyle = "#000000"
     }
     ctx.stroke()
     ctx.clip();
