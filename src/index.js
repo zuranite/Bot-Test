@@ -148,17 +148,6 @@ let botIsReady = false
 
 
 
-// Runs when the client(Bot) is online
-client.on('ready', (c) => {
-  console.log("Bot is ready for use.");
-  botIsReady = true
-  ChannelsFetched = true
-  
-  setInterval(RuntimeFunc, 1000)
-  
-  
-
-})
 let TimePassed = 0
 
 function RuntimeFunc() {
@@ -167,6 +156,8 @@ if (runtime.seconds === 59) {
   runtime.seconds = 0
   runtime.mins += 1
   TimePassed += 1
+} else {
+  runtime.seconds += 1
 }
 if (runtime.mins === 59 & runtime.seconds === 59) {
     runtime.mins = 0
@@ -183,6 +174,19 @@ if (TimePassed === 720) {
 
 
 }
+
+
+// Runs when the client(Bot) is online
+client.on('ready', (c) => {
+  console.log("Bot is ready for use.");
+  botIsReady = true
+  ChannelsFetched = true
+  
+  setInterval(RuntimeFunc, 1000)
+  
+  
+
+})
  
 // function EmbedCreator(AuthorText, AuthorAvUrl, Title, Description, Color, Fields) {
 //   const fields = [
@@ -244,8 +248,8 @@ function EmbedCreator(AuthorText, AuthorAvUrl, Title, Description, Color, Fields
   return embed;
 }
 
-module.exports = { EmbedCreator, runtime, sleep};
-module.exports = client
+module.exports = { EmbedCreator, runtime, sleep, client};
+
 
 
 // client.on('interactionCreate', (interaction) => {

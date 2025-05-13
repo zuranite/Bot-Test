@@ -225,8 +225,8 @@ module.exports = {
         await interaction.deferReply()
 
         const useroption = interaction.options.getUser("user")
-        const interactionuserID = await interaction.user.id
-        const fetchedUser = await interaction.guild.members.fetch(useroption?.id || interactionuserID)
+        const interactionuserID = interaction.user.id
+        const fetchedUser = interaction.guild.members.fetch(useroption?.id || interactionuserID)
         console.log(fetchedUser.id)
 
         const query = {
@@ -234,7 +234,7 @@ module.exports = {
             guildId: interaction.guild.id,
         }
 
-        let allLevels = await Level.find({ guildId: interaction.guild.id })
+        let allLevels = Level.find({ guildId: interaction.guild.id })
 
         allLevels.sort((a, b) => {
             if (a.level === b.level) {
@@ -258,9 +258,9 @@ module.exports = {
           //  };
 
 
-            let rank = await allLevels.findIndex((lvl) => lvl.userId === interaction.user.id)
+            let rank = allLevels.findIndex((lvl) => lvl.userId === interaction.user.id)
 
-            const LevelData = await Level.findOne(query)
+            const LevelData = Level.findOne(query)
             if (LevelData) {
                 const rank = allLevels.findIndex((lvl) => lvl.userId === interaction.user.id)
 

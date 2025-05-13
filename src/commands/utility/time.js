@@ -41,7 +41,7 @@ if (!commandEnabled) return;
             .setName('time')
             .setDescription('Runtime of bot'),
         async execute(interaction) {
-            const { runtime }= require("../../index.js")
+            const { runtime } = require("../../index.js")
             const runtimeEmbed = EmbedCreator(undefined, undefined, "Runtime", undefined, "#26a639",[
                 { name: "Hours", value: `${runtime.hours}`, inline: true}, 
                 { name: "Minutes", value: `${runtime.mins}`, inline: true},
