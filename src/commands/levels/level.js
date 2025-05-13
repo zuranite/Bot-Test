@@ -207,7 +207,7 @@ async function createRankCard(options) {
     ctx.fillText(`${shortcurrentxp}`, 850 - shortxpmetrics.width - 5, barY - 10)
 
     // Output to file
-    const buffer = canvas.toBuffer('image/png');
+    const buffer = canvas.toBuffer('image/jpeg');
     return buffer
     
 }
@@ -265,7 +265,7 @@ module.exports = {
 
 
 
-            const LevelData = Level.findOne(query)
+            const LevelData = await Level.findOne(query)
             if (LevelData) {
                 const rank = allLevels.findIndex((lvl) => lvl.userId === interaction.user.id)
 
@@ -280,7 +280,7 @@ module.exports = {
                 })
                 
 
-                const Attachment = await new AttachmentBuilder(image, { name: "rank.png" })
+                const Attachment = new AttachmentBuilder(image, { name: "rank.png" })
                 console.log(Attachment)
                 await interaction.editReply({ content: " ", files: [Attachment]})
 
@@ -318,7 +318,7 @@ module.exports = {
         await interaction.editReply({ content: `There was an issue executing the command: ${error}`, flags: MessageFlags.Ephemeral });
     } else {
         try {
-            await interaction.editReply({ content: `Error executing command: ${error}`});
+            await interaction.editReply({ content: `Error executing command: ${error}`, flags: MessageFlags.Ephemeral});
         } catch (err) {
             console.error('Failed to edit reply:', err);
         }
