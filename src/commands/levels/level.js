@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, AttachmentBuilder, MessageFlags } = require("discord.js")
+const sleep = require("../../modules/sleep.js")
 const Level = require("../../Models/Level.js")
 const LevelXP = require("../../utils/LevelXP.js")
 
@@ -282,6 +283,8 @@ module.exports = {
 
                 const Attachment = new AttachmentBuilder(image, { name: "rank.png" })
                 console.log(Attachment)
+                sleep(2000)
+                
                 await interaction.editReply({ content: " ", files: [Attachment]})
 
             }
@@ -308,7 +311,7 @@ module.exports = {
                 console.log("Buffer size:", image.length / 1024)
 
                 const Attachment = new AttachmentBuilder(image, { name: "rank.png" })
-
+                sleep(2000)
                 await interaction.editReply({ content: " ", files: [Attachment]})
                 
             }
