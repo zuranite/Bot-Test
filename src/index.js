@@ -135,7 +135,7 @@ return RuntimeEmbed
 // Maybe lets the codespace stay active
 function stayactive() {
   const Embed = RuntimeEmbedFunc(runtime)
-  const GithubChannel = client.channels.cache.get("1354492831103844454")
+  const GithubChannel = client.channels.cache.get("1372074923056435230")
   GithubChannel.send({embeds: [Embed]})
 }
 
