@@ -208,7 +208,7 @@ async function createRankCard(options) {
     ctx.fillText(`${shortcurrentxp}`, 850 - shortxpmetrics.width - 5, barY - 10)
 
     // Output to file
-    const buffer = canvas.toBuffer('image/jpeg', { quality: 0.7 });
+    const buffer = canvas.toBuffer('image/jpeg');
     return buffer
     
 }
