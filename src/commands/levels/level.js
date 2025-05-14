@@ -97,6 +97,8 @@ async function createRankCard(options) {
     new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout fetching avatar")), 10000))
 ]);
 
+if (!res.ok) throw new Error(`Failed to load avatar.`)
+
     const arraybuffer = await res.arrayBuffer()
     const avatarbuffer = await Buffer.from(arraybuffer)
     const avatar = await loadImage(avatarbuffer);
@@ -271,7 +273,7 @@ module.exports = {
 
                 const image = await createRankCard({
                     avatarURL: fetchedUser.displayAvatarURL(),
-                    username: interaction.user.tag,
+                    username: fetchedUser.user.tag,
                     currentXP: LevelData.xp,
                     requiredXP: LevelXP(LevelData.level),
                     level: LevelData.level,
@@ -303,7 +305,7 @@ module.exports = {
 
                 const image = await createRankCard({
                     avatarURL: fetchedUser.displayAvatarURL(),
-                    username: useroption.tag,
+                    username: fetchedUser.tag.user,
                     currentXP: LevelData.xp,
                     requiredXP: LevelXP(LevelData.level),
                     level: LevelData.level,
