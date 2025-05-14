@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, AttachmentBuilder, MessageFlags } = require("discord.js")
-const sleep = require("../../modules/sleep.js")
+const { sleep } = require("../../modules/sleep.js")
 const Level = require("../../Models/Level.js")
 const LevelXP = require("../../utils/LevelXP.js")
 
