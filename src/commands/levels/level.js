@@ -283,7 +283,7 @@ module.exports = {
 
                 const Attachment = new AttachmentBuilder(image, { name: "rank.png" })
                 console.log(Attachment)
-                sleep(2000)
+                sleep(5000)
                 
                 await interaction.editReply({ content: " ", files: [Attachment]})
 
@@ -313,7 +313,7 @@ module.exports = {
                 console.log("Buffer size:", image.length / 1024)
 
                 const Attachment = new AttachmentBuilder(image, { name: "rank.png" })
-                sleep(2000)
+                sleep(5000)
                 await interaction.editReply({ content: " ", files: [Attachment]})
                 
             } else {
