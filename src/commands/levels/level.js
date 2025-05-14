@@ -93,7 +93,7 @@ async function createRankCard(options) {
     avatarURL = avatarURL.replace(".webp", ".png")
     const res = await Promise.race([
     fetch(avatarURL, { headers: { "User-Agent": "Mozilla/5.0" }}),
-    new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout fetching avatar")), 2000))
+    new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout fetching avatar")), 10000))
 ]);
 
     const arraybuffer = await res.arrayBuffer()
@@ -278,6 +278,7 @@ module.exports = {
                     rank: rank + 1,
                     presence: fetchedUser.presence?.status,
                 })
+                console.log("Buffer size:", image.length / 1024)
                 
 
                 const Attachment = new AttachmentBuilder(image, { name: "rank.png" })
