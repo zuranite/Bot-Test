@@ -283,7 +283,7 @@ module.exports = {
 
                 const Attachment = new AttachmentBuilder(image, { name: "rank.png" })
                 console.log(Attachment)
-                sleep(5000)
+                await sleep(2000)
                 
                 await interaction.editReply({ content: " ", files: [Attachment]})
 
@@ -313,7 +313,7 @@ module.exports = {
                 console.log("Buffer size:", image.length / 1024)
 
                 const Attachment = new AttachmentBuilder(image, { name: "rank.png" })
-                sleep(5000)
+                await sleep(2000)
                 await interaction.editReply({ content: " ", files: [Attachment]})
                 
             } else {
@@ -322,7 +322,7 @@ module.exports = {
         }
     } catch(error) {
          if (!interaction.replied && !interaction.deferred) {
-        await interaction.editReply({ content: `There was an issue executing the command: ${error}`, ephemeral: true });
+        await interaction.reply({ content: `There was an issue executing the command: ${error}`, ephemeral: true });
     } else {
         try {
             await interaction.editReply({ content: `Error executing command: ${error}`, ephemeral: true });
