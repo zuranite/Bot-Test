@@ -6,7 +6,7 @@ const LevelXP = require("../../utils/LevelXP.js")
 const presenceColors = {
     "online": "#3ed606",
     "idle": "#f2b716",
-    "dnd": "#d41608",
+    "dnd": "#d41608"
 }
 
 
@@ -287,6 +287,8 @@ module.exports = {
                 
                 await interaction.editReply({ content: " ", files: [Attachment]})
 
+            } else {
+                await interaction.editReply({ content: "You don't have any data. Try again when you send a message.", flags: MessageFlags.Ephemeral})
             }
 
         } else {
@@ -314,6 +316,8 @@ module.exports = {
                 sleep(2000)
                 await interaction.editReply({ content: " ", files: [Attachment]})
                 
+            } else {
+                await interaction.editReply({ content: "This user doesn't have any data. Try again when they send a message.", flags: MessageFlags.Ephemeral})
             }
         }
     } catch(error) {
