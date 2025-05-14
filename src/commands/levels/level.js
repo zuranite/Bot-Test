@@ -224,9 +224,8 @@ module.exports = {
         
     ),
     async execute(interaction) {
-        await interaction.deferReply()
         try {
-
+            await interaction.deferReply()
         console.log("lvl cmd received")
         
 
@@ -316,10 +315,10 @@ module.exports = {
         }
     } catch(error) {
          if (!interaction.replied && !interaction.deferred) {
-        await interaction.editReply({ content: `There was an issue executing the command: ${error}`, flags: MessageFlags.Ephemeral });
+        await interaction.editReply({ content: `There was an issue executing the command: ${error}`, ephemeral: true });
     } else {
         try {
-            await interaction.editReply({ content: `Error executing command: ${error}`, flags: MessageFlags.Ephemeral});
+            await interaction.editReply({ content: `Error executing command: ${error}`, ephemeral: true });
         } catch (err) {
             console.error('Failed to edit reply:', err);
         }
