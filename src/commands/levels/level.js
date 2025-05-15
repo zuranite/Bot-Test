@@ -72,6 +72,7 @@ async function createRankCard(options) {
     } = options;
 
     const cornerRadius = 12;
+    console.log("Creating Rank Card...")
 
     // Background
    //ctx.fillStyle = '#1a0342';
@@ -215,12 +216,16 @@ if (!res.ok) throw new Error(`Failed to load avatar.`)
     ctx.fillText(`${shortcurrentxp}`, 850 - shortxpmetrics.width - 5, barY - 10)
 
     // Output to file
+    try {
     const fileName = `${uuidv4()}.jpeg`
     const filePath = path.join(__dirname, "../../tempRankCards/", fileName)
     const buffer = canvas.toBuffer('image/jpeg');
     fs.writeFileSync(filePath, buffer)
     console.log("Image path made")
     return filePath
+    } catch(error) {
+        console.log("Error buffering rankcard:", error)
+    }
     
 }
 
@@ -320,7 +325,7 @@ module.exports = {
 
                 const image = await createRankCard({
                     avatarURL: fetchedUser.displayAvatarURL(),
-                    username: fetchedUser.tag.user,
+                    username: fetchedUser.user.tag,
                     currentXP: LevelData.xp,
                     requiredXP: LevelXP(LevelData.level),
                     level: LevelData.level,
