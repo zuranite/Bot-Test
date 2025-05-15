@@ -219,6 +219,7 @@ if (!res.ok) throw new Error(`Failed to load avatar.`)
     const filePath = path.join(__dirname, "../../tempRankCards/", fileName)
     const buffer = canvas.toBuffer('image/jpeg');
     fs.writeFileSync(filePath, buffer)
+    console.log("Image path made")
     return filePath
     
 }
@@ -288,7 +289,6 @@ module.exports = {
                     rank: rank + 1,
                     presence: fetchedUser.presence?.status,
                 })
-                console.log("Buffer size:", image.length / 1024)
                 
 
                 const Attachment = new AttachmentBuilder(image, { name: "rank.png" })
