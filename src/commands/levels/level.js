@@ -1,4 +1,8 @@
 const { SlashCommandBuilder, AttachmentBuilder, MessageFlags } = require("discord.js")
+const fs = require("fs")
+const fsPromises = require("fs/promises")
+const path = require("path")
+const { v4: uuidv4 } = require("uuid")
 const { sleep } = require("../../modules/sleep.js")
 const Level = require("../../Models/Level.js")
 const LevelXP = require("../../utils/LevelXP.js")
@@ -43,6 +47,7 @@ function drawRoundedRect(ctx, x, y, width, height, radius, progress) {
 
 
 const { createCanvas, loadImage, registerFont } = require('canvas');
+const { Console } = require("console")
 
 
 
@@ -210,8 +215,11 @@ if (!res.ok) throw new Error(`Failed to load avatar.`)
     ctx.fillText(`${shortcurrentxp}`, 850 - shortxpmetrics.width - 5, barY - 10)
 
     // Output to file
+    const fileName = `${uuidv4()}.jpeg`
+    const filePath = path.join(__dirname, "../../tempRankCards/", fileName)
     const buffer = canvas.toBuffer('image/jpeg');
-    return buffer
+    fs.writeFileSync(filePath, buffer)
+    return filePath
     
 }
 
@@ -284,11 +292,15 @@ module.exports = {
                 
 
                 const Attachment = new AttachmentBuilder(image, { name: "rank.png" })
-                console.log("yay")
-                await Attachment
-                console.log(Attachment)
+
                 
                 await interaction.editReply({ content: " ", files: [Attachment]})
+
+                try {
+                    fsPromises.unlink(image)
+                } catch (error) {
+                    console.log("Error deleting rank card:", error)
+                }
 
             } else {
                 await interaction.editReply({ content: "You don't have any data. Try again when you send a message.", flags: MessageFlags.Ephemeral})
@@ -313,11 +325,16 @@ module.exports = {
                     presence: fetchedUser.presence?.status,
                 })
                 //image = Buffer.from(arrayBuffer)
-                console.log("Buffer size:", image.length / 1024)
 
                 const Attachment = new AttachmentBuilder(image, { name: "rank.png" })
-                await Attachment
+
                 await interaction.editReply({ content: " ", files: [Attachment]})
+
+                try {
+                    await fs.unlink(image)
+                } catch(error) {
+                    console.log("Error deleting rank card:", error)
+                }
                 
             } else {
                 await interaction.editReply({ content: "This user doesn't have any data. Try again when they send a message.", flags: MessageFlags.Ephemeral})
