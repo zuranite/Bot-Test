@@ -220,7 +220,7 @@ if (!res.ok) throw new Error(`Failed to load avatar.`)
     const fileName = `${uuidv4()}.jpeg`
     const filePath = path.join(__dirname, "../../tempRankCards/", fileName)
     const buffer = canvas.toBuffer('image/jpeg');
-    fs.writeFileSync(filePath, buffer)
+    await fsPromises.writeFile(filePath, buffer)
     console.log("Image path made")
     return filePath
     } catch(error) {
