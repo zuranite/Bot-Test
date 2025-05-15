@@ -292,12 +292,15 @@ module.exports = {
                 
 
                 const Attachment = new AttachmentBuilder(image, { name: "rank.png" })
+                console.log("image created")
 
                 
                 await interaction.editReply({ content: " ", files: [Attachment]})
+                console.log("image sent")
 
                 try {
-                    fsPromises.unlink(image)
+                    await fsPromises.unlink(image)
+                    console.log("image deleted")
                 } catch (error) {
                     console.log("Error deleting rank card:", error)
                 }
@@ -327,11 +330,14 @@ module.exports = {
                 //image = Buffer.from(arrayBuffer)
 
                 const Attachment = new AttachmentBuilder(image, { name: "rank.png" })
+                console.log("image created")
 
                 await interaction.editReply({ content: " ", files: [Attachment]})
+                console.log("image sent")
 
                 try {
-                    await fs.unlink(image)
+                    await fsPromises.unlink(image)
+                    console.log("image deleted")
                 } catch(error) {
                     console.log("Error deleting rank card:", error)
                 }
