@@ -325,10 +325,10 @@ module.exports = {
         }
     } catch(error) {
          if (!interaction.replied && !interaction.deferred) {
-        await interaction.reply({ content: `There was an issue executing the command: ${error}`, ephemeral: true });
+        await interaction.reply({ content: `There was an issue executing the command: ${error}`, flags: MessageFlags.Ephemeral});
     } else {
         try {
-            await interaction.editReply({ content: `Error executing command: ${error}`, ephemeral: true });
+            await interaction.editReply({ content: `Error executing command: ${error}`, flags: MessageFlags.Ephemeral });
         } catch (err) {
             console.error('Failed to edit reply:', err);
         }
