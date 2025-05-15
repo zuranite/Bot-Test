@@ -167,7 +167,7 @@ if (runtime.mins === 59 & runtime.seconds === 59) {
 
 
 
-if (TimePassed === 720) {
+if (TimePassed === 10) {
   TimePassed = 0
   stayactive()
 }
