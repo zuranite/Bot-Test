@@ -294,14 +294,18 @@ module.exports = {
                     rank: rank + 1,
                     presence: fetchedUser.presence?.status,
                 })
-                
 
-                const Attachment = new AttachmentBuilder(image, { name: "rank.png" })
+                const buffer = fsPromises.readFile(image)
+                
+                const Attachment = new AttachmentBuilder(buffer, { name: "rank.png" })
                 console.log("image created")
 
-                
+                try {
                 await interaction.editReply({ content: " ", files: [Attachment]})
                 console.log("image sent")
+                } catch(error) {
+                    console.log("Error editing reply", error)
+                }
 
                 try {
                     await fsPromises.unlink(image)
@@ -333,13 +337,16 @@ module.exports = {
                     presence: fetchedUser.presence?.status,
                 })
                 //image = Buffer.from(arrayBuffer)
+                const buffer = await fsPromises.readFile(image)
 
-                const Attachment = new AttachmentBuilder(image, { name: "rank.png" })
+                const Attachment = new AttachmentBuilder(buffer, { name: "rank.png" })
                 console.log("image created")
-
+                try {
                 await interaction.editReply({ content: " ", files: [Attachment]})
                 console.log("image sent")
-
+                } catch(error) {
+                    console.log("Error editing reply", error)
+                }
                 try {
                     await fsPromises.unlink(image)
                     console.log("image deleted")
