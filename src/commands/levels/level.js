@@ -240,140 +240,79 @@ module.exports = {
         .setDescription("[NOT REQUIRED] The user to check levels of.")
         
     ),
-    async execute(interaction) {
-        try {
-            await interaction.deferReply()
-        console.log("lvl cmd received")
-        
+async execute(interaction) {
+    try {
+        // Defer reply ASAP to prevent Discord from retrying
+        await interaction.deferReply();
 
-        const useroption = interaction.options.getUser("user")
-        const interactionuserID = interaction.user.id
-        const fetchedUser = await interaction.guild.members.fetch(useroption?.id || interactionuserID)
-        console.log(fetchedUser.id)
+        console.log("Level command received");
+
+        const userOption = interaction.options.getUser("user");
+        const userId = userOption?.id || interaction.user.id;
+        const fetchedUser = await interaction.guild.members.fetch(userId);
+        console.log(`Fetched user ID: ${fetchedUser.id}`);
 
         const query = {
-            userId: useroption?.id || interactionuserID,
+            userId,
             guildId: interaction.guild.id,
-        }
+        };
 
-        let allLevels = await Level.find({ guildId: interaction.guild.id })
+        const allLevels = await Level.find({ guildId: interaction.guild.id });
 
         allLevels.sort((a, b) => {
-            if (a.level === b.level) {
-                return b.xp - a.xp;
-            } else {
-                return b.level - a.level;
-            }
-        })
+            return b.level === a.level ? b.xp - a.xp : b.level - a.level;
+        });
 
-        
+        const levelData = await Level.findOne(query);
 
+        if (!levelData) {
+            const msg = userOption
+                ? "This user doesn't have any data yet."
+                : "You don't have any data. Try again after sending a message.";
+            return interaction.editReply({
+                content: msg,
+                flags: MessageFlags.Ephemeral,
+            });
+        }
 
+        const rank = allLevels.findIndex((lvl) => lvl.userId === userId) + 1;
 
+        const image = await createRankCard({
+            avatarURL: fetchedUser.displayAvatarURL(),
+            username: fetchedUser.user.tag,
+            currentXP: levelData.xp,
+            requiredXP: LevelXP(levelData.level),
+            level: levelData.level,
+            rank: rank,
+            presence: fetchedUser.presence?.status,
+        });
 
-        if (!useroption) {
+        const buffer = await fsPromises.readFile(image);
+        const attachment = new AttachmentBuilder(buffer, { name: "rank.png" });
 
-            //const query = {
-              //  userId: useroption.id,
-                //:guildId: interaction.guild.id
+        await interaction.editReply({ content: " ", files: [attachment] });
 
-          //  };
+        await fsPromises.unlink(image).catch((err) =>
+            console.warn("Error deleting image:", err)
+        );
+    } catch (error) {
+        console.error("Level command error:", error);
 
+        const errorMessage = `There was an issue executing the command: ${error.message || error}`;
 
-
-            const LevelData = await Level.findOne(query)
-            if (LevelData) {
-                const rank = allLevels.findIndex((lvl) => lvl.userId === interaction.user.id)
-
-                const image = await createRankCard({
-                    avatarURL: fetchedUser.displayAvatarURL(),
-                    username: fetchedUser.user.tag,
-                    currentXP: LevelData.xp,
-                    requiredXP: LevelXP(LevelData.level),
-                    level: LevelData.level,
-                    rank: rank + 1,
-                    presence: fetchedUser.presence?.status,
-                })
-
-                const buffer = await fsPromises.readFile(image)
-                
-                const Attachment = new AttachmentBuilder(buffer, { name: "rank.png" })
-                console.log("image created")
-
-                try {
-                    console.log("Interaction deferred?:", interaction.deferred)
-                    console.log("Interaction Replied?:", interaction.replied)
-                await interaction.editReply({ content: " ", files: [Attachment]})
-                console.log("image sent")
-                } catch(error) {
-                    console.log("Error editing reply", error)
-                }
-
-                try {
-                    await fsPromises.unlink(image)
-                    console.log("image deleted")
-                } catch (error) {
-                    console.log("Error deleting rank card:", error)
-                }
-
-            } else {
-                await interaction.editReply({ content: "You don't have any data. Try again when you send a message.", flags: MessageFlags.Ephemeral})
-            }
-
+        if (!interaction.deferred && !interaction.replied) {
+            await interaction.reply({
+                content: errorMessage,
+                flags: MessageFlags.Ephemeral,
+            });
         } else {
-
-
-            const LevelData = await Level.findOne(query)
-            if (LevelData) {
-                //interaction.editreply(`This is ur xp discordian: ${LevelData.xp}`)
-
-                const rank = allLevels.findIndex((lvl) => lvl.userId === useroption.id)
-
-                const image = await createRankCard({
-                    avatarURL: fetchedUser.displayAvatarURL(),
-                    username: fetchedUser.user.tag,
-                    currentXP: LevelData.xp,
-                    requiredXP: LevelXP(LevelData.level),
-                    level: LevelData.level,
-                    rank: rank + 1,
-                    presence: fetchedUser.presence?.status,
-                })
-                //image = Buffer.from(arrayBuffer)
-                const buffer = await fsPromises.readFile(image)
-
-                const Attachment = new AttachmentBuilder(buffer, { name: "rank.png" })
-                console.log("image created")
-                try {
-                    console.log("Interaction deferred?:", interaction.deferred)
-                    console.log("Interaction Replied?:", interaction.replied)
-                await interaction.editReply({ content: " ", files: [Attachment]})
-                console.log("image sent")
-                } catch(error) {
-                    console.log("Error editing reply", error)
-                }
-                try {
-                    await fsPromises.unlink(image)
-                    console.log("image deleted")
-                } catch(error) {
-                    console.log("Error deleting rank card:", error)
-                }
-                
-            } else {
-                await interaction.editReply({ content: "This user doesn't have any data. Try again when they send a message.", flags: MessageFlags.Ephemeral})
-            }
-        }
-    } catch(error) {
-         if (!interaction.replied && !interaction.deferred) {
-        await interaction.reply({ content: `There was an issue executing the command: ${error}`, flags: MessageFlags.Ephemeral});
-    } else {
-        try {
-            await interaction.editReply({ content: `Error executing command: ${error}`, flags: MessageFlags.Ephemeral });
-        } catch (err) {
-            console.error('Failed to edit reply:', err);
+            await interaction.editReply({
+                content: errorMessage,
+                flags: MessageFlags.Ephemeral,
+            }).catch(err => console.error("Failed to edit reply:", err));
         }
     }
-    }
+}
 
-    }
 
 }
