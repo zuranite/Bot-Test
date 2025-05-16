@@ -301,6 +301,8 @@ module.exports = {
                 console.log("image created")
 
                 try {
+                    console.log("Interaction deferred?:", interaction.deferred)
+                    console.log("Interaction Replied?:", interaction.replied)
                 await interaction.editReply({ content: " ", files: [Attachment]})
                 console.log("image sent")
                 } catch(error) {
@@ -342,6 +344,8 @@ module.exports = {
                 const Attachment = new AttachmentBuilder(buffer, { name: "rank.png" })
                 console.log("image created")
                 try {
+                    console.log("Interaction deferred?:", interaction.deferred)
+                    console.log("Interaction Replied?:", interaction.replied)
                 await interaction.editReply({ content: " ", files: [Attachment]})
                 console.log("image sent")
                 } catch(error) {
