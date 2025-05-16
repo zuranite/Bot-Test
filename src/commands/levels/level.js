@@ -217,9 +217,9 @@ if (!res.ok) throw new Error(`Failed to load avatar.`)
 
     // Output to file
     try {
-    const fileName = `${uuidv4()}.jpeg`
+    const fileName = `${uuidv4()}.png`
     const filePath = path.join("/tmp", fileName)
-    const buffer = canvas.toBuffer('image/jpeg');
+    const buffer = canvas.toBuffer('image/png');
     await fsPromises.writeFile(filePath, buffer)
     console.log("Image path made")
     return filePath
