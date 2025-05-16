@@ -295,7 +295,7 @@ module.exports = {
                     presence: fetchedUser.presence?.status,
                 })
 
-                const buffer = fsPromises.readFile(image)
+                const buffer = await fsPromises.readFile(image)
                 
                 const Attachment = new AttachmentBuilder(buffer, { name: "rank.png" })
                 console.log("image created")
